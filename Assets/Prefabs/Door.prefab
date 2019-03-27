@@ -146,5 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a00e597da63de246a15bc319c74a04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberCollectiblesRequired: 0
+  color: {r: 0.3019608, g: 1, b: 0, a: 1}
+  numberCollectiblesRequired: 3
   doorCollider: {fileID: 6155782359149467934}

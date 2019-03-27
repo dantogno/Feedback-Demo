@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
 
     private bool isWaitingOnDamageCooldown;
     private int hitPoints;
+    private Animator animator;
     private static PlayerHealth instance;
     private int HitPoints
     {
@@ -30,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
         else
             Destroy(this);
         hitPoints = maxHitPoints;
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage()
@@ -39,7 +41,11 @@ public class PlayerHealth : MonoBehaviour
             HitPoints--;
             Debug.Log($"Took damage. Hitpoints remaining: {HitPoints}");
             if (HitPoints < 1)
+            {
+                if (Settings.IsPlayerDeathAnimationEnabled)
+                    animator.SetTrigger("playerDied");
                 GameManager.Lose();
+            }
             else
                 StartCoroutine(DoDamageCooldown());
         }
@@ -48,7 +54,10 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator DoDamageCooldown()
     {
         isWaitingOnDamageCooldown = true;
+        if (Settings.IsFlashAfterTakingDamageEnabled)
+            animator.SetBool("shouldFlash", true);
         yield return new WaitForSeconds(damageCooldown);
         isWaitingOnDamageCooldown = false;
+        animator.SetBool("shouldFlash", false);
     }
 }
