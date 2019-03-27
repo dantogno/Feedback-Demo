@@ -45,10 +45,20 @@ public class Settings : MonoBehaviour
     {
         IsGameOverTextEnabled = !IsGameOverTextEnabled;
     }
+    public void FlashAfterTakingDamageToggled()
+    {
+        IsFlashAfterTakingDamageEnabled = !IsFlashAfterTakingDamageEnabled;
+    }
+    public void PlayerDeathAnimationToggled()
+    {
+        IsPlayerDeathAnimationEnabled = !IsPlayerDeathAnimationEnabled;
+    }
     public static void ResetSettings()
     {
         IsFloatingNumbersEnabled = false;
         IsColorCodingEnabled = false;
         IsGameOverTextEnabled = false;
+        IsPlayerDeathAnimationEnabled = false;
+        IsFlashAfterTakingDamageEnabled = false;
     }
 }
