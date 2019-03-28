@@ -70,6 +70,7 @@ public class Door : MonoBehaviour
     }
     private void OnCollectibleGathered()
     {
+        text.text = $"Need {numberCollectiblesRequired - Collectible.CollectiblesGathered}";
         if (Collectible.CollectiblesGathered >= numberCollectiblesRequired)
             UnlockDoor();
     }
