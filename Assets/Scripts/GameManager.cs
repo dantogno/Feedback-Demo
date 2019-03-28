@@ -22,6 +22,6 @@ public static class GameManager
     public static void ResetGame()
     {
         Settings.ResetSettings();
-        IsGameOver = false;
+        IsGameOver = false;        
     }
 }

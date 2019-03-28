@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class Collectible : MonoBehaviour
 {
     [Tooltip("Use this color when color coding is turned on.")]
@@ -12,16 +13,19 @@ public class Collectible : MonoBehaviour
 
     private GameObject floatingNumbersCanvas;
     public static event Action CollectibleGathered;
-    public static int CollectiblesGathered { get; set; } = 0;
+    public static int CollectiblesGathered { get; private set; } = 0;
     private new SpriteRenderer renderer;
     private bool isCollected;
     private Text floatingText;
+    private AudioSource audioSource;
 
     private void Awake()
     {
+        CollectiblesGathered = 0;
         renderer= GetComponent<SpriteRenderer>();
         floatingText = GetComponentInChildren<Text>(true);
         floatingNumbersCanvas = GetComponentInChildren<Canvas>(true).gameObject;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,6 +39,7 @@ public class Collectible : MonoBehaviour
             floatingText.text = CollectiblesGathered.ToString();
             if (Settings.IsFloatingNumbersEnabled)
                 floatingNumbersCanvas.SetActive(true);
+            audioSource.Play();
         }
     }
 
